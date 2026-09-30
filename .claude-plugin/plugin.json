@@ -1,10 +1,20 @@
 {
   "name": "essentio",
   "displayName": "Essentio",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Invoice from a conversation with Essentio: draft, check, issue and send an Invoice, and close a month's VAT from Essentio's own reports. Pairs with the Essentio connector at mcp.essentio.pro.",
-  "author": { "name": "Essentio", "url": "https://essentio.pro" },
+  "author": {
+    "name": "Essentio",
+    "url": "https://essentio.pro"
+  },
   "homepage": "https://developers.essentio.pro",
+  "repository": "https://github.com/Gramatton/essentio-plugin",
+  "privacyPolicyUrl": "https://essentio.pro/privacy",
   "license": "MIT",
-  "keywords": ["invoicing", "invoices", "vat", "accounting"]
+  "keywords": [
+    "invoicing",
+    "invoices",
+    "vat",
+    "accounting"
+  ]
 }
