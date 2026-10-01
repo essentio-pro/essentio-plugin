@@ -63,6 +63,15 @@ as it does in Essentio.
 **Try it first in a Test business:** its documents are marked as samples, their numbers start with
 `TEST-`, and what it sends reaches you, never a Client.
 
+### Claude Code
+
+Add Essentio's marketplace, then install the plugin from it:
+
+```text
+/plugin marketplace add essentio-pro/essentio-plugin
+/plugin install essentio@essentio
+```
+
 ## Data
 
 The plugin holds no key or password. The connector sends what you ask for — Clients, documents, their

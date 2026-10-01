@@ -69,9 +69,11 @@ Then read the answer's `actions`. Each Action is `{open, code, remedy}`:
 
 - `actions.issue.open` false: the Draft cannot be issued as it stands. Say so, with its `code`, before
   asking to issue.
-- `actions.send.open` false with `remedy` `connect_mail_provider`: the Business has no mail account
-  connected, so Essentio cannot email the document yet. Tell the person now, and give them the
-  `remedy_url`, where they connect one in Essentio's settings. Issuing still works.
+- `actions.send.open` false with `remedy` `connect_mail_provider`: Essentio cannot email the
+  document for the Business right now — it has no email address of its own, its recipients through
+  Essentio for today are all emailed (`sending_limit_reached`), or its connected mailbox was lost. Tell
+  the person now, in the refusal's words, and give them the `remedy_url`, Essentio's email settings.
+  Issuing still works.
 
 ## 5. Issue, once the person says so
 
@@ -111,9 +113,9 @@ person what happened in `message`'s words, and act on `type`:
   Nothing was written, with one exception: a Send refused `mail_account_lost` (the connected mail
   account refused to renew its access) may have issued its Draft on the way — when the error carries
   a `document_number`, the Draft is now issued under that number and stays issued, unsent. With the
-  `remedy` `connect_mail_provider`, the Business has no mail account connected: the person connects
-  one in Essentio's settings (the document's `actions.send.remedy_url` leads there), then asks to send
-  again.
+  `remedy` `connect_mail_provider`, Essentio cannot email for the Business right now, as the refusal's
+  words say: the person puts it right in Essentio's settings (the document's `actions.send.remedy_url`
+  leads there) — or, past the day's limit, waits for tomorrow — then asks to send again.
 - `not_delivered`: the mail provider did not take the email. This is not "nothing written": a Send of a
   Draft issued it on the way. When the error carries a `document_number`, the Draft is now issued under
   that number and stays issued, unsent. Say so plainly, so the person does not think it is still a

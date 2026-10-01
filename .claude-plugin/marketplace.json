@@ -1,0 +1,15 @@
+{
+  "name": "essentio",
+  "owner": {
+    "name": "Essentio",
+    "url": "https://essentio.pro"
+  },
+  "description": "Essentio's plugin: invoicing and VAT from a conversation, through the Essentio connector.",
+  "plugins": [
+    {
+      "name": "essentio",
+      "source": "./",
+      "description": "Invoice from a conversation with Essentio: draft, check, issue and send an Invoice, and close a month's VAT from Essentio's own reports. Pairs with the Essentio connector at mcp.essentio.pro."
+    }
+  ]
+}

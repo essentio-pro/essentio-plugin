@@ -1,7 +1,7 @@
 {
   "name": "essentio",
   "displayName": "Essentio",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Invoice from a conversation with Essentio: draft, check, issue and send an Invoice, and close a month's VAT from Essentio's own reports. Pairs with the Essentio connector at mcp.essentio.pro.",
   "author": {
     "name": "Essentio",
