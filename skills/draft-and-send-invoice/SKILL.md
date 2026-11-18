@@ -46,7 +46,12 @@ Call `essentio_create_draft` with:
   another;
 - `due_date` (YYYY-MM-DD): today plus the Client's payment terms, unless the person gave a date;
 - `lines`: each with `description`, `quantity`, `unit_price` (VAT excluded) and `vat_rate`, all as
-  decimal strings such as `"500.00"` and `"19"` — never as numbers.
+  decimal strings such as `"500.00"` and `"19"` — never as numbers;
+- a Discount, only when the person asked for one: `discount_percent` (a percentage of the Subtotal,
+  such as `"10"`) or `discount_amount` (an amount in the document's currency, such as `"50.00"`), as a
+  decimal string — never both. It is taken off the whole document before VAT, and only a document whose
+  Lines all have the same VAT rate and category takes one: if they differ, the Draft is refused at
+  `discount`, so tell the person rather than splitting it yourself.
 
 A Draft has no number and no issue date, is not sent and counts in no report, so creating it commits
 the person to nothing. A second identical `essentio_create_draft` within about ten minutes is answered
@@ -55,15 +60,19 @@ identical Drafts, send a fresh `idempotency_key` with the second.
 
 ## 4. Check the figures with the person
 
-The person is shown the Draft as a card with its Client, Lines, VAT and Total. Read the same answer
-yourself and compare it with what they asked for: the Client's name, each Line, `vat_groups`,
-`subtotal`, `total_vat`, `total` and `currency`.
+The person is shown the Draft as a card with its Client, Lines, VAT and Total — and, when it carries a
+Discount, the Discount and the Subtotal after discount. Read the same answer yourself and compare it with
+what they asked for: the Client's name, each Line, `vat_groups`, `subtotal`, `discount_percent`,
+`discount_amount`, `subtotal_after_discount`, `total_vat`, `total` and `currency`. In Essentio's answer
+`subtotal` − `discount_amount` = `subtotal_after_discount`, and `subtotal_after_discount` + `total_vat` =
+`total`; without a Discount, `discount_amount` is zero and `subtotal_after_discount` is `subtotal`.
 
 - Quote Essentio's figures as they are in the answer. Do not recompute VAT or totals and present your
   own numbers: Essentio's rounding is the one the document will carry.
 - If something is not what the person meant (a price, a quantity, a rate, the wrong Client), change the
   Draft with `essentio_update_draft`. Only the fields you send change, and `lines`, when sent, replace
-  every Line — so send them all.
+  every Line — so send them all. Sending `discount_percent` or `discount_amount` replaces the Discount,
+  `null` removes it, and sending neither keeps it.
 
 Then read the answer's `actions`. Each Action is `{open, code, remedy}`:
 
@@ -150,6 +159,6 @@ Two failures carry no such tool error:
 When the connection is to a Test business, its documents are marked as samples and everything it sends
 goes to its Owner, never to the Client. It is the place to try this workflow first.
 `essentio_get_business_setup` and every document say so with `is_test: true`, and every number it
-issues carries `TEST-`, such as `TEST-INV-2026-0007`. It issues no more Invoices a year than the
-Free plan: past that, Issue and Send are refused `issuing_limit_reached`, which its Owner clears by
+issues carries `TEST-`, such as `TEST-INV-2026-0007`. It has an Issuing limit of its own, documents
+a month: past it, Issue and Send are refused `issuing_limit_reached`, which its Owner clears by
 resetting it in Essentio. Tell the person it is a sample, not a real Invoice.

@@ -57,7 +57,7 @@ own tool permissions decide whether it has to.
 
 **What you need:** an Essentio account ([free sign-up](https://essentio.pro/register)) with a verified
 email and a Business. The connector works on every plan: on the Free plan the Business's Owner reads
-and writes (up to 200 issued documents a year) and other members read; on a paid plan every Role acts
+and writes (up to 5 issued Invoices a month) and other members read; on a paid plan every Role acts
 as it does in Essentio.
 
 **Try it first in a Test business:** its documents are marked as samples, their numbers start with
